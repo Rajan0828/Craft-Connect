@@ -1,0 +1,230 @@
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
+const PostProjectPage = ({ postProjectSubmit }) => {
+  const [category, setCategory] = useState('Tech and Development');
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [salary, setSalary] = useState('Under $100');
+  const [location, setLocation] = useState('');
+  const [companyName, setCompanyName] = useState('');
+  const [companyDescription, setCompanyDescription] = useState('');
+  const [contactEmail, setContactEmail] = useState('');
+  const [contactPhone, setContactPhone] = useState('');
+
+  const navigate = useNavigate();
+
+  const submitForm = (e) => {
+    e.preventDefault();
+    const newProject = {
+      title,
+      category,
+      location,
+      description,
+      salary,
+      company: {
+        name: companyName,
+        description: companyDescription,
+        contactEmail,
+        contactPhone,
+      },
+    };
+
+    postProjectSubmit(newProject);
+    toast.success('Project added successfully');
+    return navigate('/projects');
+  };
+
+  return (
+    <section className="bg-[#FFF4E0] min-h-screen">
+      <div className="container m-auto max-w-2xl py-24">
+        <div className="bg-white px-6 py-8 mb-4 shadow-lg rounded-md border border-[#FF8C42]">
+          <form onSubmit={submitForm}>
+            <h2 className="text-3xl text-center font-semibold mb-6 text-[#FF8C42]">
+              Post a Project
+            </h2>
+
+            {/* Project Category */}
+            <div className="mb-4">
+              <label className="block text-gray-800 font-bold mb-2">
+                Project Category
+              </label>
+              <select
+                className="border border-gray-300 rounded w-full py-2 px-3 focus:border-[#FF8C42] focus:ring focus:ring-[#FF8C42]/40"
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                required
+              >
+                <option value="Tech-and-Development">
+                  Tech and Development
+                </option>
+                <option value="Design-and-Creative">
+                  Design and Creative
+                </option>
+                <option value="Writing-and-Translation">
+                  Writing and Translation
+                </option>
+                <option value="Marketing">Marketing</option>
+                <option value="Business and Admin">
+                  Business and Admin
+                </option>
+                <option value="Education">Education</option>
+                <option value="Other-Services">Other Services</option>
+              </select>
+            </div>
+
+            {/* Project Title */}
+            <div className="mb-4">
+              <label className="block text-gray-800 font-bold mb-2">
+                Project Title
+              </label>
+              <input
+                type="text"
+                className="border border-gray-300 rounded w-full py-2 px-3 focus:border-[#FF8C42] focus:ring focus:ring-[#FF8C42]/40"
+                placeholder="eg. Logo Design for Startup Clothing Brand"
+                required
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
+            </div>
+
+            {/* Project Description */}
+            <div className="mb-4">
+              <label className="block text-gray-800 font-bold mb-2">
+                Project Description
+              </label>
+              <textarea
+                className="border border-gray-300 rounded w-full py-2 px-3 focus:border-[#FF8C42] focus:ring focus:ring-[#FF8C42]/40"
+                rows="4"
+                placeholder="Add duties, expectations, requirements, etc."
+                required
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              ></textarea>
+            </div>
+
+            {/* Salary */}
+            <div className="mb-4">
+              <label className="block text-gray-800 font-bold mb-2">
+                Salary Range
+              </label>
+              <select
+                className="border border-gray-300 rounded w-full py-2 px-3 focus:border-[#FF8C42] focus:ring focus:ring-[#FF8C42]/40"
+                value={salary}
+                onChange={(e) => setSalary(e.target.value)}
+                required
+              >
+                <option value="Under $100">Under $100</option>
+                <option value="$100 - $250">$100 - $250</option>
+                <option value="$250 - $500">$250 - $500</option>
+                <option value="$500 - $750">$500 - $750</option>
+                <option value="$750 - $1,000">$750 - $1,000</option>
+                <option value="$1,000 - $1,500">
+                  $1,000 - $1,500
+                </option>
+                <option value="$1,500 - $2,000">
+                  $1,500 - $2,000
+                </option>
+                <option value="$2,000 - $3,000">
+                  $2,000 - $3,000
+                </option>
+                <option value="$3,000 - $5,000">
+                  $3,000 - $5,000
+                </option>
+                <option value="Over $5,000">Over $5,000</option>
+              </select>
+            </div>
+
+            {/* Location */}
+            <div className="mb-4">
+              <label className="block text-gray-800 font-bold mb-2">
+                Location
+              </label>
+              <input
+                type="text"
+                className="border border-gray-300 rounded w-full py-2 px-3 focus:border-[#FF8C42] focus:ring focus:ring-[#FF8C42]/40"
+                placeholder="Client Location"
+                required
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+              />
+            </div>
+
+            {/* Client Profile */}
+            <h3 className="text-2xl mb-5 text-[#FF8C42]">
+              Client Profile
+            </h3>
+
+            <div className="mb-4">
+              <label className="block text-gray-800 font-bold mb-2">
+                Client/Company
+              </label>
+              <input
+                type="text"
+                className="border border-gray-300 rounded w-full py-2 px-3 focus:border-[#FF8C42] focus:ring focus:ring-[#FF8C42]/40"
+                placeholder="Client Name"
+                required
+                value={companyName}
+                onChange={(e) => setCompanyName(e.target.value)}
+              />
+            </div>
+
+            <div className="mb-4">
+              <label className="block text-gray-800 font-bold mb-2">
+                About the Client/Company
+              </label>
+              <textarea
+                className="border border-gray-300 rounded w-full py-2 px-3 focus:border-[#FF8C42] focus:ring focus:ring-[#FF8C42]/40"
+                rows="4"
+                placeholder="What do you specialize in? What are you looking for?"
+                required
+                value={companyDescription}
+                onChange={(e) =>
+                  setCompanyDescription(e.target.value)
+                }
+              ></textarea>
+            </div>
+
+            <div className="mb-4">
+              <label className="block text-gray-800 font-bold mb-2">
+                Contact Email
+              </label>
+              <input
+                type="email"
+                className="border border-gray-300 rounded w-full py-2 px-3 focus:border-[#FF8C42] focus:ring focus:ring-[#FF8C42]/40"
+                placeholder="Email address"
+                required
+                value={contactEmail}
+                onChange={(e) => setContactEmail(e.target.value)}
+              />
+            </div>
+
+            <div className="mb-6">
+              <label className="block text-gray-800 font-bold mb-2">
+                Contact Phone
+              </label>
+              <input
+                type="tel"
+                className="border border-gray-300 rounded w-full py-2 px-3 focus:border-[#FF8C42] focus:ring focus:ring-[#FF8C42]/40"
+                placeholder="Phone Number"
+                required
+                value={contactPhone}
+                onChange={(e) => setContactPhone(e.target.value)}
+              />
+            </div>
+
+            <button
+              className="bg-[#FF8C42] hover:bg-[#FF7A00] text-white font-bold py-2 px-4 rounded-full w-full transition-colors duration-200"
+              type="submit"
+            >
+              Post Project
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default PostProjectPage;
