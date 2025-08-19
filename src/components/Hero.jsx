@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import heroImg from '../assets/images/hero.png';
 
 const Hero = () => {
   return (
     <section className="bg-[#FFF4E0] py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-12">
-        {/* Left: Image */}
         <motion.div
           className="w-full md:w-1/2"
           initial={{ opacity: 0, x: -50 }}
@@ -14,13 +14,12 @@ const Hero = () => {
           transition={{ duration: 1 }}
         >
           <img
-            src="/src/assets/images/hero.png"
+            src={heroImg}
             alt="Freelance illustration"
             className="w-full h-auto"
           />
         </motion.div>
 
-        {/* Right: Text */}
         <motion.div
           className="w-full md:w-1/2 text-center md:text-left"
           initial={{ opacity: 0, y: 50 }}

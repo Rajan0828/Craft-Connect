@@ -8,7 +8,7 @@ const HomeCards = () => {
     <section className="py-12 bg-[#FFF4E0]">
       <div className="container-xl lg:container m-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-4">
-          {/* For Freelancers */}
+      
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -31,7 +31,7 @@ const HomeCards = () => {
             </Card>
           </motion.div>
 
-          {/* For Clients */}
+        
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
