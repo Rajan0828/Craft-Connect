@@ -11,9 +11,7 @@ const ProjectListings = ({ isHome = false }) => {
     const fetchProjects = async () => {
       const limit3 = isHome ? '?limit=3' : '';
       try {
-        const res = await fetch(
-          `${import.meta.env.NEXT_PUBLIC_API_URL}/projects?limit=3`
-        );
+        const res = await fetch(`/api/projects${limit3}`);
         const data = await res.json();
         setProjects(data);
       } catch (error) {
