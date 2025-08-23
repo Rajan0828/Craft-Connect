@@ -9,7 +9,7 @@ const ProjectListings = ({ isHome = false }) => {
 
   useEffect(() => {
     const fetchProjects = async () => {
-      const limit3 = isHome ? '?_limit=3' : '';
+      const limit3 = isHome ? '?limit=3' : '';
       try {
         const res = await fetch(`/api/projects${limit3}`);
         const data = await res.json();
@@ -20,6 +20,7 @@ const ProjectListings = ({ isHome = false }) => {
         setLoading(false);
       }
     };
+
     fetchProjects();
   }, [isHome]);
 
@@ -31,6 +32,7 @@ const ProjectListings = ({ isHome = false }) => {
             ? 'Recent Freelance Projects'
             : 'Browse Freelance Projects'}
         </h2>
+
         {loading ? (
           <div className="flex justify-center items-center col-span-full min-h-[300px]">
             <LoadingIcon loading={loading} />
@@ -43,16 +45,14 @@ const ProjectListings = ({ isHome = false }) => {
             variants={{
               hidden: {},
               visible: {
-                transition: {
-                  staggerChildren: 0.15,
-                },
+                transition: { staggerChildren: 0.15 },
               },
             }}
           >
             <AnimatePresence>
               {projects.map((project) => (
                 <motion.div
-                  key={project.id}
+                  key={project._id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}

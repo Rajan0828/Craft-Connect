@@ -56,13 +56,13 @@ const PostProjectPage = ({ postProjectSubmit }) => {
                 onChange={(e) => setCategory(e.target.value)}
                 required
               >
-                <option value="Tech-and-Development">
+                <option value="Tech and Development">
                   Tech and Development
                 </option>
-                <option value="Design-and-Creative">
+                <option value="Design and Creative">
                   Design and Creative
                 </option>
-                <option value="Writing-and-Translation">
+                <option value="Writing and Translation">
                   Writing and Translation
                 </option>
                 <option value="Marketing">Marketing</option>
@@ -70,7 +70,7 @@ const PostProjectPage = ({ postProjectSubmit }) => {
                   Business and Admin
                 </option>
                 <option value="Education">Education</option>
-                <option value="Other-Services">Other Services</option>
+                <option value="Other Services">Other Services</option>
               </select>
             </div>
 

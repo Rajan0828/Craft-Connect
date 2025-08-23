@@ -1,6 +1,10 @@
-import { useParams, useLoaderData } from 'react-router-dom';
+import {
+  useParams,
+  useLoaderData,
+  Link,
+  useNavigate,
+} from 'react-router-dom';
 import { FaArrowLeft, FaMapMarker } from 'react-icons/fa';
-import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const ProjectPage = ({ deleteProjectSubmit }) => {
@@ -8,11 +12,11 @@ const ProjectPage = ({ deleteProjectSubmit }) => {
   const project = useLoaderData();
   const navigate = useNavigate();
 
-  const onDeleteClick = async (projectId) => {
-    const confirm = window.confirm(
+  const handleDelete = async (projectId) => {
+    const confirmDelete = window.confirm(
       'Are you sure you want to delete this project?'
     );
-    if (!confirm) return;
+    if (!confirmDelete) return;
 
     await deleteProjectSubmit(projectId);
     toast.success('Project deleted successfully');
@@ -20,86 +24,96 @@ const ProjectPage = ({ deleteProjectSubmit }) => {
   };
 
   return (
-    <>
-      {/* Go Back */}
-      <section className="bg-[#FFF4E0] py-4">
-        <div className="container m-auto px-6">
+    <div className="bg-[#FFF4E0] min-h-screen">
+      {/* Back Link */}
+      <section className="py-4">
+        <div className="container mx-auto px-6">
           <Link
             to="/projects"
-            className="text-[#FF8C42] hover:text-[#FF7A00] flex items-center font-semibold"
+            className="flex items-center font-semibold text-[#FF8C42] hover:text-[#FF7A00] transition-colors"
           >
-            <FaArrowLeft className="mr-2" />
-            Back to Freelance Project Listings
+            <FaArrowLeft className="mr-2" /> Back to Freelance
+            Projects
           </Link>
         </div>
       </section>
 
-      <section className="bg-[#FFF4E0] py-10">
-        <div className="container m-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-[7fr_3fr] gap-6">
+      {/* Main Content */}
+      <section className="py-10">
+        <div className="container mx-auto px-6">
+          <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-8">
+            {/* Project Details */}
             <main>
-              <div className="bg-white p-6 rounded-lg shadow-md text-center md:text-left">
-                <div className="text-orange-700 mb-4 font-semibold">
+              <div className="bg-white p-6 rounded-lg shadow-md mb-6">
+                <span className="text-orange-700 font-semibold">
                   {project.category}
-                </div>
-                <h1 className="text-3xl font-bold mb-4">
+                </span>
+                <h1 className="text-3xl font-bold mt-2">
                   {project.title}
                 </h1>
-                <div className="text-orange-700 mb-4 flex items-center justify-center md:justify-start">
-                  <FaMapMarker className="mr-1" />
-                  <p>{project.location}</p>
+                <div className="flex items-center text-orange-700 mt-2">
+                  <FaMapMarker className="mr-2" />
+                  <span>{project.location}</span>
                 </div>
               </div>
 
-              <div className="bg-white p-6 rounded-lg shadow-md mt-6">
-                <h3 className="text-lg font-bold mb-6">
+              <div className="bg-white p-6 rounded-lg shadow-md">
+                <h2 className="text-xl font-bold mb-4">
                   Project Description
-                </h3>
-                <p className="mb-4">{project.description}</p>
+                </h2>
+                <p className="mb-6">{project.description}</p>
 
-                <h3 className="text-lg font-bold mb-2">Salary</h3>
-                <p className="mb-4">{project.salary} / Year</p>
+                <h2 className="text-xl font-bold mb-2">Salary</h2>
+                <p className="mb-2">{project.salary} / Year</p>
               </div>
             </main>
 
             {/* Sidebar */}
-            <aside>
+            <aside className="space-y-6">
+              {/* Company Info */}
               <div className="bg-white p-6 rounded-lg shadow-md">
-                <h2 className="text-2xl font-bold mb-2 text-[#FF8C42]">
+                <h3 className="text-2xl font-bold text-[#FF8C42] mb-2">
                   {project.company.name}
-                </h2>
-                <p className="mb-4">{project.company.description}</p>
+                </h3>
+                <p className="text-gray-700">
+                  {project.company.description}
+                </p>
 
                 <hr className="my-4 border-gray-200" />
 
-                <h3 className="text-lg font-semibold">
-                  Contact Email:
-                </h3>
-                <p className="my-2 bg-[#FFF0E0] p-2 font-bold rounded">
-                  {project.company.contactEmail}
-                </p>
+                <div>
+                  <h4 className="text-lg font-semibold">
+                    Contact Email
+                  </h4>
+                  <p className="mt-1 bg-[#FFF0E0] p-2 rounded font-bold break-words">
+                    {project.company.contactEmail}
+                  </p>
+                </div>
 
-                <h3 className="text-lg font-semibold">
-                  Contact Phone:
-                </h3>
-                <p className="my-2 bg-[#FFF0E0] p-2 font-bold rounded">
-                  {project.company.contactPhone}
-                </p>
+                <div className="mt-4">
+                  <h4 className="text-lg font-semibold">
+                    Contact Phone
+                  </h4>
+                  <p className="mt-1 bg-[#FFF0E0] p-2 rounded font-bold">
+                    {project.company.contactPhone}
+                  </p>
+                </div>
               </div>
 
-              <div className="bg-white p-6 rounded-lg shadow-md mt-6">
-                <h3 className="text-xl font-bold mb-4 text-[#FF8C42]">
+              {/* Actions */}
+              <div className="bg-white p-6 rounded-lg shadow-md">
+                <h3 className="text-xl font-bold text-[#FF8C42] mb-4">
                   Manage Project
                 </h3>
                 <Link
-                  to={`/edit-project/${project.id}`}
-                  className="bg-[#FF8C42] hover:bg-[#FF7A00] text-white font-bold py-2 px-4 rounded-full w-full block text-center mt-2 transition-colors duration-200"
+                  to={`/edit-project/${project._id}`}
+                  className="block w-full text-center bg-[#FF8C42] hover:bg-[#FF7A00] text-white font-bold py-2 rounded-full transition-colors mb-2"
                 >
                   Edit Project
                 </Link>
                 <button
-                  onClick={() => onDeleteClick(project.id)}
-                  className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full w-full block text-center mt-2"
+                  onClick={() => handleDelete(project._id)}
+                  className="block w-full text-center bg-red-500 hover:bg-red-600 text-white font-bold py-2 rounded-full transition-colors"
                 >
                   Delete Project
                 </button>
@@ -108,14 +122,20 @@ const ProjectPage = ({ deleteProjectSubmit }) => {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 };
 
+// Loader
 const projectLoader = async ({ params }) => {
-  const res = await fetch(`/api/projects/${params.id}`);
-  const data = await res.json();
-  return data;
+  const res = await fetch(
+    `http://localhost:5000/api/projects/${params.id}`
+  );
+  if (!res.ok)
+    throw new Response('Failed to load project', {
+      status: res.status,
+    });
+  return res.json();
 };
 
 export { ProjectPage as default, projectLoader };

@@ -36,12 +36,12 @@ const App = () => {
 
   //Update Project
   const updateProjectSubmit = async (project) => {
-    const res = await fetch(`/api/projects/${project.id}`, {
+    const res = await fetch(`/api/projects/${project._id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(job),
+      body: JSON.stringify(project),
     });
     return;
   };
