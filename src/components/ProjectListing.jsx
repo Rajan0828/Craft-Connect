@@ -10,9 +10,8 @@ const ProjectListing = ({ project }) => {
   const toggleDescription = () =>
     setShowFullDescription((prev) => !prev);
 
-  // truncated description for preview
   const truncatedDescription =
-    project.description.length > 90
+    project.description.length > 230
       ? project.description.substring(0, 230) + '...'
       : project.description;
 
@@ -31,10 +30,11 @@ const ProjectListing = ({ project }) => {
           {project.title}
         </h3>
 
-        {/* Fixed height description with scroll */}
         <div
-          className="text-gray-700 text-sm pr-2 overflow-y-auto"
-          style={{ height: '120px' }} // adjust as needed
+          className={`text-gray-700 text-sm pr-2 overflow-y-${
+            showFullDescription ? 'auto' : 'hidden'
+          }`}
+          style={{ height: '140px' }}
         >
           {showFullDescription
             ? project.description
