@@ -11,7 +11,11 @@ const ProjectListings = ({ isHome = false }) => {
     const fetchProjects = async () => {
       const limit3 = isHome ? '?limit=3' : '';
       try {
-        const res = await fetch(`/api/projects${limit3}`);
+        // const res = await fetch(`/api/projects${limit3}`); //LOCAL DEVELOPMENT
+        const API_URL =
+          process.env.REACT_APP_API_URL || 'http://localhost:5000'; //PRODUCTION
+        const res = await fetch(`${API_URL}/api/projects${limit3}`); //PRODUCTION
+
         const data = await res.json();
         setProjects(data);
       } catch (error) {
