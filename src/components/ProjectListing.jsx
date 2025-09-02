@@ -10,13 +10,15 @@ const ProjectListing = ({ project }) => {
   const toggleDescription = () =>
     setShowFullDescription((prev) => !prev);
 
-  const description = showFullDescription
-    ? project.description
-    : project.description.substring(0, 90) + '...';
+  // truncated description for preview
+  const truncatedDescription =
+    project.description.length > 90
+      ? project.description.substring(0, 230) + '...'
+      : project.description;
 
   return (
     <motion.div
-      className="bg-white rounded-xl shadow-xl p-6 relative flex flex-col justify-between h-[400px] transition-transform hover:-translate-y-1 hover:shadow-2xl"
+      className="bg-white rounded-xl shadow-xl p-6 relative flex flex-col justify-between h-[370px] transition-transform hover:-translate-y-1 hover:shadow-2xl"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.9 }}
@@ -29,9 +31,16 @@ const ProjectListing = ({ project }) => {
           {project.title}
         </h3>
 
-        <div className="text-gray-700 text-sm max-h-32 overflow-y-auto pr-2">
-          {description}
+        {/* Fixed height description with scroll */}
+        <div
+          className="text-gray-700 text-sm pr-2 overflow-y-auto"
+          style={{ height: '120px' }} // adjust as needed
+        >
+          {showFullDescription
+            ? project.description
+            : truncatedDescription}
         </div>
+
         <button
           onClick={toggleDescription}
           className="text-[#FF8C42] font-semibold mt-2 hover:text-[#FF7A00] transition-colors duration-200 text-sm"

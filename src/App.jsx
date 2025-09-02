@@ -15,7 +15,7 @@ import EditProjectPage from './pages/EditProjectPage';
 
 const App = () => {
   const API_URL =
-    import.meta.env.REACT_APP_API_URL ||
+    import.meta.env.VITE_API_URL ||
     'https://craft-connect-3.onrender.com';
 
   // Add New Project
