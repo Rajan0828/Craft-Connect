@@ -128,7 +128,7 @@ const ProjectPage = ({ deleteProjectSubmit }) => {
 
 // Loader
 const API_URL =
-  process.env.REACT_APP_API_URL ||
+  import.meta.env.REACT_APP_API_URL ||
   'https://craft-connect-3.onrender.com';
 
 const projectLoader = async ({ params }) => {

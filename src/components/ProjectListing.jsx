@@ -28,7 +28,10 @@ const ProjectListing = ({ project }) => {
         <h3 className="text-xl font-bold text-gray-800 mb-2">
           {project.title}
         </h3>
-        <div className="text-gray-700 text-sm">{description}</div>
+
+        <div className="text-gray-700 text-sm max-h-32 overflow-y-auto pr-2">
+          {description}
+        </div>
         <button
           onClick={toggleDescription}
           className="text-[#FF8C42] font-semibold mt-2 hover:text-[#FF7A00] transition-colors duration-200 text-sm"

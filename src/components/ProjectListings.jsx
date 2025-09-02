@@ -13,7 +13,7 @@ const ProjectListings = ({ isHome = false }) => {
       try {
         // const res = await fetch(`/api/projects${limit3}`); //LOCAL DEVELOPMENT
         const API_URL =
-          process.env.REACT_APP_API_URL ||
+          import.meta.env.REACT_APP_API_URL ||
           'https://craft-connect-3.onrender.com'; //PRODUCTION
         // || 'http://localhost:5000'
         const res = await fetch(`${API_URL}/api/projects${limit3}`); //PRODUCTION
