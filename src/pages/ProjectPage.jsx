@@ -127,9 +127,14 @@ const ProjectPage = ({ deleteProjectSubmit }) => {
 };
 
 // Loader
+const API_URL =
+  process.env.REACT_APP_API_URL ||
+  'https://craft-connect-3.onrender.com';
+
 const projectLoader = async ({ params }) => {
   const res = await fetch(
-    `http://localhost:5000/api/projects/${params.id}`
+    // `http://localhost:5000/api/projects/${params.id}`
+    `${API_URL}/api/projects/${params.id}`
   );
   if (!res.ok)
     throw new Response('Failed to load project', {
