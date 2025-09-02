@@ -14,36 +14,37 @@ import PostProjectPage from './pages/AddProjectPage';
 import EditProjectPage from './pages/EditProjectPage';
 
 const App = () => {
-  //Add New Project
+  const API_URL =
+    process.env.REACT_APP_API_URL ||
+    'https://craft-connect-3.onrender.com';
+
+  // Add New Project
   const postProjectSubmit = async (newProject) => {
-    const res = await fetch('/api/projects', {
+    await fetch(`${API_URL}/api/projects`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(newProject),
     });
-    return;
   };
 
-  //Delete Project
+  // Delete Project
   const deleteProjectSubmit = async (id) => {
-    const res = await fetch(`/api/projects/${id}`, {
+    await fetch(`${API_URL}/api/projects/${id}`, {
       method: 'DELETE',
     });
-    return;
   };
 
-  //Update Project
+  // Update Project
   const updateProjectSubmit = async (project) => {
-    const res = await fetch(`/api/projects/${project._id}`, {
+    await fetch(`${API_URL}/api/projects/${project._id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(project),
     });
-    return;
   };
 
   const router = createBrowserRouter(

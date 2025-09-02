@@ -3,7 +3,6 @@ import ProjectListing from './ProjectListing';
 import LoadingIcon from './LoadingIcon';
 import { motion, AnimatePresence } from 'framer-motion';
 
-
 const ProjectListings = ({ isHome = false }) => {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
