@@ -31,8 +31,10 @@ const ProjectListing = ({ project }) => {
         </h3>
 
         <div
-          className={`text-gray-700 text-sm pr-2 overflow-y-${
-            showFullDescription ? 'auto' : 'hidden'
+          className={`text-gray-700 text-sm pr-2 ${
+            showFullDescription
+              ? 'overflow-y-auto'
+              : 'overflow-hidden'
           }`}
           style={{ height: '140px' }}
         >
